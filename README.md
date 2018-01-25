@@ -10,8 +10,13 @@ Les scripts .php nécessitent d'être executés régulièrement par des tâches 
 - D'un hébergement Linux associé au nom de domaine de votre site-web par exemple.
 	- Si vous ne disposez pas d'un tel hébergement, voici ceux que j'utilise : https://www.amen.fr/hebergement-web/linux/comparatif/
 - D'un compte Twitter
-- D'une App Twitter 
+- D'une [App Twitter](https://apps.twitter.com/) 
+- D'une API Key [Google News](https://newsapi.org/docs/get-started)
 - D'un éditeur de texte avec coloration syntaxique tel que [ATOM](https://atom.io/)
+
+## API Key Google News
+Vous devez disposer de cette clé pour interroger la base de données en temps réel de Google. Pour cela, rendez-vous sur [Google News](https://newsapi.org/docs/get-started) et enregistrez-vous avec votre compte Google.<br />
+Vous obtiendrez alors votre API Key. Notez-la dans un endroit et mettez-la de côté.
 
 ## Création de l'App Twitter
 Pour créer une App Twitter en quelques minutes, rendez-vous sur https://apps.twitter.com/ et cliquez sur **Create New App**
@@ -39,6 +44,24 @@ $settings = array(
 );
 ?>
 ```
-## Configuration
+- Vos fichiers sont maintenant connectés avec votre App Twitter
+
+## Configuration des Fichiers
+**Configuration des Likes Auto**
+Le modèle de base utilisé est _like1.php_. Il vous suffit juste paramétrer une ligne dans ce fichier pour dire au Bot ce qu'il doit aimer :
+```
+$getfield = '?q=#SEO&lang=fr&result_type=recent&count=10';
+```
+Les 2 paramètres réglables sont :
+- **q=**
+	- Ajoutez ici le Hastag souhaité (Exemple : q=#Chatbot)
+- **count=**
+	- Saisissez ici le nombre de tweets que le script aimera automatiquement à chaque execution. (ne pas dépasser les 30). Exemple count=10
+    
+Vous pouvez donc dupliquer ce modèle de fichier à l'infini et changer uniquement ces 2 paramètres. Votre Compte Twitter aimera alors automatiquement de nombreux tweets dont les Hastags seront paramétrés dans ces fichiers.
+
+
+
+## Configuration des Tâches CRON
 ## Aller + loin
 ## Contacts
