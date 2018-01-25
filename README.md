@@ -113,12 +113,70 @@ De cette manière, votre ascension et votre taux de publication sera progressif 
 - Notez l'adresse relative à ce dossier
 - Ouvrez ensuite votre Panneau de configuration des tâches CRON (ici dans mon cas, [cPanel](https://cpanel.com/))
 - Ajoutez une tâche CRON et sélectionnez une heure d'éxecution de votre tâche
-- Dans le Champs "Command" ajoutez une commande comme ceci en utilisant wget
+- Dans le Champs "Command" ajoutez une commande comme ceci par exemple en utilisant wget :
 ```
-wget https://mon-chatbot.com/tweets_auto/cron_relation_client.php >/dev/null 2>&1
+wget https://mon-nom-de-domaine.com/tweets_auto/like1.php >/dev/null 2>&1
 ```
 
-l'argument ```>/dev/null 2>&1``` vous permet de ne pas être notifié par email lors de l'execution de cette commande.
+l'argument ```>/dev/null 2>&1``` vous permet de ne pas être notifié par email lors de l'execution de la commande.
+
+Votre Bot est maintenant configuré et il ne vous reste plus qu'à surveiller le contenu publié et profiter des articles de presse générés dans votre fil d'actualité.
 
 ## Aller + loin
+Une fois votre Bot paramétré pour Twitter, vous pouvez l'adapter facilement pour publier les articles de presse sur votre fil d'actualité Facebook.
+
+Pour effectuer cela, vous allez avoir besoin de :
+- Un token d'accès de Page
+- Un ID de votre page Facebook
+
+**Pour obtenir votre token d'accès de page**: rendez-vous sur https://developers.facebook.com/tools/explorer/<br />
+- Sélectionnez la page que dont vous souhaitez obtenir le token et cliquez ensuite sur le bouton "**Obtenir le Token**".
+- Plusieurs choix vous seront alors proposés
+- Selectionnez "**Obtenir un token d'accès de Page**" 
+- Une demande d'autorisation est alors affichée : Acceptez tout !
+- Dans le champs **Jeton d'accès** sera alors affiché le token **TEMPORAIRE** ! 
+- Cliquez sur le I (informationsà bleu à gauche du jeton d'accès et cliquez sur "**Ouvrir dans l'outil Access Token**" 
+
+Vous allez devoir étendre le token et le faire devenir permanent ! <br />
+Cliquez alors sur le bouton en bas de cette nouvelle page : "**Etendre le Token**" <br />
+Notez alors le Token d'accès de Page !
+
+**Pour Obtenir l'ID de votre page Facebook**: <br />
+Rendez-vous sur votre page Facebook et cliquez sur "**A propos**" .
+En bas de cette onglet sera alors affiché l'ID de votre page Facebook. Notez ce numero pour la suite des opérations.
+
+Vous allez donc devoir maintenant copier-coller ce script en bas de vos pages .php presse1.php, presse2.php et ainsi de suite : 
+```
+$page_access_token = 'XXXXXXXXX';
+$page_id = 'XXXXX';
+
+
+$reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+if(preg_match($reg_exUrl, $v, $url)) {
+       $data['link'] = $url[0];
+       $data['message'] = str_replace($url[0], '', $v); // remove link from message
+
+} else {
+       $data['link'] = '';
+       $data['message'] = $v;
+
+}
+$data['access_token'] = $page_access_token;
+
+$post_url = 'https://graph.facebook.com/'.$page_id.'/feed';
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $post_url);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$return = curl_exec($ch);
+curl_close($ch);
+```
+et n'oubliez pas de modifier les variables : <br />
+$page_access_token = 'XXXXXXXXX';<br />
+$page_id = 'XXXXX';<br /> 
+avec vos Token récupérés plus tôt.
+
 ## Contacts
+Pour tous renseignements ou demandes d'informations, veuillez contacter directement [mathieu.duboy@gmail.com](mathieu.duboy@gmail.com)
+
