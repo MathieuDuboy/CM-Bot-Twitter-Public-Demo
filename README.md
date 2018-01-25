@@ -47,7 +47,13 @@ $settings = array(
 - Vos fichiers sont maintenant connectés avec votre App Twitter
 
 ## Configuration des Fichiers
+Vos fichiers doivent maintenant être paramétrés manuellement un à un. 
 **Configuration des Likes Auto**<br />
+**Configuration des Publications d'articles de Presse Auto**<br />
+**Configuration des Publications de promotion de votre activité**<br />
+
+
+### Configuration des Likes Auto
 Le modèle de base utilisé est _like1.php_. Il vous suffit juste paramétrer une ligne dans ce fichier pour dire au Bot ce qu'il doit aimer :
 ```
 $getfield = '?q=#SEO&lang=fr&result_type=recent&count=10';
@@ -60,7 +66,7 @@ Les 2 paramètres réglables sont :
     
 Vous pouvez donc dupliquer ce modèle de fichier à l'infini et changer uniquement ces 2 paramètres. Votre Compte Twitter aimera alors automatiquement de nombreux tweets dont les Hastags seront paramétrés dans ces fichiers avec comme regèle : 1 fichier .php = 1 Hastag associé !
 
-**Configuration des Publications d'articles de Presse Auto**<br />
+### Configuration des Publications d'articles de Presse Auto
 Le modèle de base utilisé est _presse1.php_.  Pour chacun de vos fichiers, vous devrez paramétrer ces variables de cette manière : <br />
 ```
 $keyword = 'Chatbot';
@@ -79,6 +85,8 @@ $mot_cle = array("#ChatBots", "#NLP", "#Ai", "#IA", "#machinelearning");
 Vous pouvez donc ici ajouter jusqu'à 10 Hastags autour de la variable $keyword (des mots ou expressions en rapport avec ce mot).
 
 Vous pouvez donc dupliquer ce modèle de fichier à l'infini et changer uniquement ces 4 paramètres. Votre Compte Twitter publiera alors automatiquement de nombreux articles de presse dont les Hastags et le contenu seront paramétrés dans ces fichiers avec comme regèle : 1 fichier .php = 1 thème (mot clé).
+
+### Configuration des Publications de promotion de votre activité
 
 ## Configuration des Tâches CRON
 ## Aller + loin
