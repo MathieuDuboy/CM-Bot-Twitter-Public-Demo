@@ -154,7 +154,7 @@ $page_id = 'XXXXX';
 $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
 if(preg_match($reg_exUrl, $v, $url)) {
        $data['link'] = $url[0];
-       $data['message'] = str_replace($url[0], '', $v); // remove link from message
+       $data['message'] = str_replace($url[0], '', $v);
 
 } else {
        $data['link'] = '';
@@ -173,8 +173,10 @@ $return = curl_exec($ch);
 curl_close($ch);
 ```
 et n'oubliez pas de modifier les variables : <br />
-$page_access_token = 'XXXXXXXXX';<br />
-$page_id = 'XXXXX';<br /> 
+```
+$page_access_token = 'XXXXXXXXX';
+$page_id = 'XXXXX'; 
+```
 avec vos Token récupérés plus tôt.
 
 ## Contacts
