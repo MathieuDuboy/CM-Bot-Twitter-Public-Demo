@@ -47,11 +47,7 @@ $settings = array(
 - Vos fichiers sont maintenant connectés avec votre App Twitter
 
 ## Configuration des Fichiers
-Vos fichiers doivent maintenant être paramétrés manuellement un à un. 
-**Configuration des Likes Auto**<br />
-**Configuration des Publications d'articles de Presse Auto**<br />
-**Configuration des Publications de promotion de votre activité**<br />
-
+Vos fichiers doivent maintenant être paramétrés manuellement un à un comme suit :
 
 ### Configuration des Likes Auto
 Le modèle de base utilisé est _like1.php_. Il vous suffit juste paramétrer une ligne dans ce fichier pour dire au Bot ce qu'il doit aimer :
@@ -87,7 +83,42 @@ Vous pouvez donc ici ajouter jusqu'à 10 Hastags autour de la variable $keyword 
 Vous pouvez donc dupliquer ce modèle de fichier à l'infini et changer uniquement ces 4 paramètres. Votre Compte Twitter publiera alors automatiquement de nombreux articles de presse dont les Hastags et le contenu seront paramétrés dans ces fichiers avec comme regèle : 1 fichier .php = 1 thème (mot clé).
 
 ### Configuration des Publications de promotion de votre activité
+Le fichier utilisé est _promotion.php_. Vous allez devoir configurer à l'intérieur de celui-ci un tableau de 2 à 100 publicités (je ne vous conseille pas d'aller plus loin que 100 mais vous pouvez) de cette manière : <br />
+```
+$boite = "MonTitre | Ceci est mon Titre accrocheur utilisé sur toutes mes publications\r\n";
+```
+Une fois cette variable (qui restera inchangée) paramétrée, vous devez créer le tableau PHP de vos offres, vos publicités, etc. <br />
+```
+$tweets_variables = array(
+  $boite."▶ Une promotion, un service ici pas trop long\r\nDes hastags, des mots clés
+  \r\n\r\n".$date."contact@maboite.com 2 ou 3 Hastags https://www.unlienici.com",
+  $boite."▶ Une promotion, une promotion ici pas trop longue\r\nDes hastags, des mots clés
+  \r\n\r\n".$date."contact@maboite.com 2 ou 3 Hastags https://www.unlienici.com",
+  ... // ici vous pouvez en créer 100
+  $boite."▶ Une promotion, un service ici pas trop long\r\nDes hastags, des mots clés
+  \r\n\r\n".$date."contact@maboite.com 2 ou 3 Hastags https://www.unlienici.com"
+);
+```
+A chaque exécution de ce script sera tiré au sort un tweets parmi ce tableau et il sera ensuite formaté et envoyé sur votre fil d'actualité comme si c'etait un humain qui l'avait publié.
 
 ## Configuration des Tâches CRON
+Pour exécuter les fichers promotions.php, like1.php et presse1.php, vous devez configurer des tâches récurrentes. Pour éviter de faire trop "Robot", voici ce que je vous conseille :<br />
+- Publiez une promotion toutes les 2 heures max
+- Publiez des news toutes les 6 heures
+- Likez 10 ou 20 tweets toutes les heures
+
+De cette manière, votre ascension et votre taux de publication sera progressif et non violent aux yeux de vos Followers. Le contenu sera riche et varié et ceux-ci seront ravis de vous suivre et d'être informé de toutes ces nouveautés dans votre domaine d'activité.
+
+- Commencez par héberger dans un sous-dossier du nom de domaine de votre choix (peu importe le nom de domaine) l'ensemble des fichiers configurés du dépot.
+- Notez l'adresse relative à ce dossier
+- Ouvrez ensuite votre Panneau de configuration des tâches CRON (ici dans mon cas, [cPanel](https://cpanel.com/))
+- Ajoutez une tâche CRON et sélectionnez une heure d'éxecution de votre tâche
+- Dans le Champs "Command" ajoutez une commande comme ceci en utilisant wget
+```
+wget https://mon-chatbot.com/tweets_auto/cron_relation_client.php >/dev/null 2>&1
+```
+
+l'argument ```>/dev/null 2>&1``` vous permet de ne pas être notifié par email lors de l'execution de cette commande.
+
 ## Aller + loin
 ## Contacts
