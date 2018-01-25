@@ -47,7 +47,7 @@ $settings = array(
 - Vos fichiers sont maintenant connectés avec votre App Twitter
 
 ## Configuration des Fichiers
-**Configuration des Likes Auto**
+**Configuration des Likes Auto**<br />
 Le modèle de base utilisé est _like1.php_. Il vous suffit juste paramétrer une ligne dans ce fichier pour dire au Bot ce qu'il doit aimer :
 ```
 $getfield = '?q=#SEO&lang=fr&result_type=recent&count=10';
@@ -58,9 +58,27 @@ Les 2 paramètres réglables sont :
 - **count=**
 	- Saisissez ici le nombre de tweets que le script aimera automatiquement à chaque execution. (ne pas dépasser les 30). Exemple count=10
     
-Vous pouvez donc dupliquer ce modèle de fichier à l'infini et changer uniquement ces 2 paramètres. Votre Compte Twitter aimera alors automatiquement de nombreux tweets dont les Hastags seront paramétrés dans ces fichiers.
+Vous pouvez donc dupliquer ce modèle de fichier à l'infini et changer uniquement ces 2 paramètres. Votre Compte Twitter aimera alors automatiquement de nombreux tweets dont les Hastags seront paramétrés dans ces fichiers avec comme regèle : 1 fichier .php = 1 Hastag associé !
 
+**Configuration des Publications d'articles de Presse Auto**<br />
+Le modèle de base utilisé est _presse1.php_.  Pour chacun de vos fichiers, vous devrez paramétrer ces variables de cette manière : <br />
+```
+$keyword = 'Chatbot';
+$hashtag = '#Robot';
+$keyword_sans_majuscule = 'chatbot';
+```
+- $keyword représente le mot qui sera recherché dans la base de données de Google News
+- $hastag représente le Hastag Twitter le plus proche (un synonyme) de $keyword
+- $keyword_sans_majuscule représente $keyword sans aucune majuscule
 
+Ensuite, vous devez paramétrer les Hastags aléatoires (afin d'eviter que plusieurs de vos tweets se ressemblent, j'utilise cette technique aléatoire) : 
+```
+$mot_cle = array("#ChatBots", "#NLP", "#Ai", "#IA", "#machinelearning");
+```
+
+Vous pouvez donc ici ajouter jusqu'à 10 Hastags autour de la variable $keyword (des mots ou expressions en rapport avec ce mot).
+
+Vous pouvez donc dupliquer ce modèle de fichier à l'infini et changer uniquement ces 4 paramètres. Votre Compte Twitter publiera alors automatiquement de nombreux articles de presse dont les Hastags et le contenu seront paramétrés dans ces fichiers avec comme regèle : 1 fichier .php = 1 thème (mot clé).
 
 ## Configuration des Tâches CRON
 ## Aller + loin
